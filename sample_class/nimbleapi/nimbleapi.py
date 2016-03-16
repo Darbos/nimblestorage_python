@@ -377,6 +377,14 @@ class nimbleapi(object):
         self.initiator_read()
         self.initiator_group_read()
 
+        if initiator_group_name not in self.initiator_groups:
+            self.raise_error('initiator group does not exist')
+
+        if alias not in self.initiators:
+            self.raise_error('alias does not exist')
+
+        initiator_id = self.initiators[alias]['id']
+
         # DELETE
         request_json = self.query(request_type = 'delete', request_endpoint = 'initiators/' + initiator_id)
 

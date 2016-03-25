@@ -341,7 +341,10 @@ class nimbleapi(object):
     def initiator_read(self):
         request_json = self.query(request_type = 'read', request_endpoint = 'initiators/detail')
         for item in request_json['data']:
-            self.dict_initiators[item['alias']] = item
+            if item['alias'] == None:
+                self.dict_initiators[item['id']] = item
+            else:
+                self.dict_initiators[item['alias']] = item
 
     def initiator_create(self,initiator_group_name,alias,wwpn):
         initiator_group_name = self.check_string(initiator_group_name)

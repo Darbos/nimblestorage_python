@@ -341,7 +341,7 @@ class nimbleapi(object):
     def initiator_read(self):
         request_json = self.query(request_type = 'read', request_endpoint = 'initiators/detail')
         for item in request_json['data']:
-            if item['alias'] == None:
+            if not item['alias']:
                 self.dict_initiators[item['id']] = item
             else:
                 self.dict_initiators[item['alias']] = item
